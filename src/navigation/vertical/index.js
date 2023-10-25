@@ -3,13 +3,14 @@ const navigation = () => {
     {
       title: 'Dashboards',
       icon: 'tabler:smart-home',
-      badgeContent: 'new',
-      badgeColor: 'error',
+      //badgeContent: 'new',
+      //badgeColor: 'error',
       children: [
         {
-          title: 'Analytics',
+          title: 'Nursing at Home',
           path: '/dashboards/analytics'
-        },
+        }
+        /*
         {
           title: 'CRM',
           path: '/dashboards/crm'
@@ -18,11 +19,13 @@ const navigation = () => {
           title: 'eCommerce',
           path: '/dashboards/ecommerce'
         }
+        */
       ]
     },
     {
-      sectionTitle: 'Apps & Pages'
+      sectionTitle: 'User Roles & Permissions'
     },
+    /*
     {
       title: 'Email',
       icon: 'tabler:mail',
@@ -60,10 +63,19 @@ const navigation = () => {
         }
       ]
     },
+    */
     {
-      title: 'User',
-      icon: 'tabler:user',
+      title: 'Control Panel',
+      icon: 'tabler:settings',
       children: [
+        {
+          title: 'Roles',
+          path: '/apps/roles'
+        },
+        {
+          title: 'Permissions',
+          path: '/apps/permissions'
+        },
         {
           title: 'List',
           path: '/apps/user/list'
@@ -95,20 +107,7 @@ const navigation = () => {
         }
       ]
     },
-    {
-      title: 'Roles & Permissions',
-      icon: 'tabler:settings',
-      children: [
-        {
-          title: 'Roles',
-          path: '/apps/roles'
-        },
-        {
-          title: 'Permissions',
-          path: '/apps/permissions'
-        }
-      ]
-    },
+    /*
     {
       title: 'Pages',
       icon: 'tabler:file',
@@ -346,7 +345,6 @@ const navigation = () => {
       icon: 'tabler:brand-tabler'
     },
     {
-      
       title: 'Cards',
       icon: 'tabler:id',
       children: [
@@ -457,7 +455,7 @@ const navigation = () => {
         {
           title: 'More',
           path: '/components/more'
-        },
+        }
       ]
     },
     {
@@ -518,7 +516,7 @@ const navigation = () => {
         {
           title: 'Input Mask',
           path: '/forms/form-elements/input-mask'
-        },
+        }
       ]
     },
     {
@@ -546,9 +544,11 @@ const navigation = () => {
       icon: 'tabler:layout-grid',
       path: '/tables/data-grid'
     },
+    */
     {
-      sectionTitle: 'Charts & Misc'
+      sectionTitle: 'Access Control'
     },
+    /*
     {
       title: 'Charts',
       icon: 'tabler:chart-pie',
@@ -567,13 +567,15 @@ const navigation = () => {
         }
       ]
     },
+    */
     {
       path: '/acl',
       action: 'read',
       subject: 'acl-page',
       icon: 'tabler:shield',
       title: 'Access Control'
-    },
+    }
+    /*
     {
       title: 'Others',
       icon: 'tabler:dots',
@@ -613,8 +615,10 @@ const navigation = () => {
           openInNewTab: true,
           path: 'https://demos.pixinvent.com/vuexy-nextjs-admin-template/documentation'
         }
+        
       ]
     }
+    */
   ]
 }
 
