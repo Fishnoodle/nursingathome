@@ -35,10 +35,22 @@ import FooterIllustrationsV2 from 'src/views/pages/auth/FooterIllustrationsV2'
 
 // ** React Imports + New MUI
 import * as React from 'react'
-import { FormControl, FormLabel, RadioGroup } from '@mui/material'
+import { FormControl, FormLabel, MenuItem, RadioGroup } from '@mui/material'
 import Radio from '@mui/material/Radio'
+import InputLabel from '@mui/material/InputLabel'
+
+// ** DatePicker component Imports
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import dayjs from 'dayjs'
 
 // ** Styled Components
+import { Select } from '@mui/base/Select'
+
+import OutlinedInput from '@mui/material/OutlinedInput'
+import FormHelperText from '@mui/material/FormHelperText'
+
 const RegisterIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
   maxHeight: 600,
@@ -94,9 +106,24 @@ const Register = () => {
   // ** Radio Button - Marital Status
   const [value, setValue] = useState('married')
 
-  const handleChange = event => {
+  const handleChangeMarital = event => {
     setValue(event.target.value)
   }
+
+  // ** DatePicker
+  const date = new Date().toLocaleDateString
+  const [dob, setDob] = useState(dayjs(date))
+
+  // ** Calcualtes age
+  var month_diff = Date.now() - dob.$d.getTime()
+  var age_dt = new Date(month_diff)
+  var year = age_dt.getUTCFullYear()
+  var age = Math.abs(year - 1970)
+
+  // ** Height (Feet and Inches Values)
+  const feet_value = [3, 4, 5, 6, 7, 8]
+
+  const inches_value = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
   return (
     <Box
@@ -140,11 +167,39 @@ const Register = () => {
                     fullWidth
                     sx={{ mb: 4 }}
                     label='Patient First Name'
-                    placeholder='johndoe'
+                    placeholder='First Name'
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Patient Last Name' placeholder='johndoe' />
+                  <CustomTextField
+                    autoFocus
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Patient Last Name'
+                    placeholder='Last Name'
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker label='Date of Birth' value={dob} onChange={dob => setDob(dob)} />
+                    <Typography> Age: {age}</Typography>
+                  </LocalizationProvider>
+                </Grid>
+                <Grid item xs={6} spacing={2}>
+                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Care Card #' placeholder='999999999' />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+                    <OutlinedInput
+                      id='outlined-adornment-weight'
+                      endAdornment={<InputAdornment position='end'>kg</InputAdornment>}
+                      aria-describedby='outlined-weight-helper-text'
+                      inputProps={{
+                        'aria-label': 'weight'
+                      }}
+                    />
+                    <FormHelperText id='outlined-weight-helper-text'>Weight</FormHelperText>
+                  </FormControl>
                 </Grid>
               </Grid>
               <Divider
@@ -169,7 +224,7 @@ const Register = () => {
               </Divider>
               <FormControl>
                 <FormLabel>Marital Status (please choose one)</FormLabel>
-                <RadioGroup row name='marital-status' value={value} onChange={handleChange}>
+                <RadioGroup row name='marital-status' value={value} onChange={handleChangeMarital}>
                   <FormControlLabel value='married' control={<Radio />} label='Married' />
                   <FormControlLabel value='single' control={<Radio />} label='Single' />
                   <FormControlLabel value='common-law' control={<Radio />} label='Common Law' />
