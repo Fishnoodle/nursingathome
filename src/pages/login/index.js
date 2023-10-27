@@ -188,16 +188,11 @@ const LoginPage = () => {
               <Typography variant='h3' sx={{ mb: 1.5 }}>
                 {`Welcome to ${themeConfig.templateName}! 👋🏻`}
               </Typography>
-              <Typography sx={{ color: 'text.secondary' }}>
-                Please sign-in to your account and start the adventure
-              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>Please sign-in to view your respective Dashboard</Typography>
             </Box>
-            <Alert icon={false} sx={{ py: 3, mb: 6, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
+            <Alert icon={false} sx={{ py: 2, mb: 4, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
               <Typography variant='body2' sx={{ mb: 2, color: 'primary.main' }}>
-                Admin: <strong>admin@vuexy.com</strong> / Pass: <strong>admin</strong>
-              </Typography>
-              <Typography variant='body2' sx={{ color: 'primary.main' }}>
-                Client: <strong>client@vuexy.com</strong> / Pass: <strong>client</strong>
+                Nurses: <strong>test@nursingathome.com</strong> / Pass: <strong>nurse</strong>
               </Typography>
             </Alert>
             <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>

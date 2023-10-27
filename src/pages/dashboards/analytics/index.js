@@ -12,6 +12,11 @@ import AnalyticsSalesByCountries from 'src/views/dashboards/analytics/AnalyticsS
 import AnalyticsMonthlyCampaignState from 'src/views/dashboards/analytics/AnalyticsMonthlyCampaignState'
 import AnalyticsWebsiteAnalyticsSlider from 'src/views/dashboards/analytics/AnalyticsWebsiteAnalyticsSlider'
 
+// ** Nurse Component
+import AnalyticsNurseChart from 'src/views/dashboards/analytics/AnalyticsNurseChart'
+
+// ** Calendar
+
 // ** Custom Component Import
 import KeenSliderWrapper from 'src/@core/styles/libs/keen-slider'
 import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
@@ -29,6 +34,9 @@ const AnalyticsDashboard = () => {
             <AnalyticsOrderVisits />
           </Grid>
           <Grid item xs={12} sm={6} lg={3}>
+            <AnalyticsOrderVisits />
+          </Grid>
+          <Grid item xs={12}>
             <CardStatsWithAreaChart
               stats='97.5k'
               chartColor='success'

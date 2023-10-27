@@ -11,18 +11,18 @@ const users = [
   {
     id: 1,
     role: 'admin',
-    password: 'admin',
-    fullName: 'John Doe',
-    username: 'johndoe',
-    email: 'admin@vuexy.com'
-  },
-  {
-    id: 2,
-    role: 'client',
-    password: 'client',
+    password: 'nurse',
     fullName: 'Jane Doe',
     username: 'janedoe',
-    email: 'client@vuexy.com'
+    email: 'test@nursingathome.com'
+  },
+  {
+    id: 1,
+    role: 'client',
+    password: 'client',
+    fullName: 'John Doe',
+    username: 'johndoe',
+    email: 'test@nursingathome.com'
   }
 ]
 

@@ -16,6 +16,27 @@ const AnalyticsOrderVisits = () => {
   return (
     <Card>
       <CardContent sx={{ p: theme => `${theme.spacing(5)} !important` }}>
+        <Box>
+          <div>
+            <Typography variant='h4'> Nurses Blood Test Check-in w/ Nurse Josie Smith</Typography>
+            <LinearProgress
+              value={65}
+              color='info'
+              variant='determinate'
+              sx={{
+                height: 2,
+                '&.MuiLinearProgress-colorInfo': { backgroundColor: 'primary.main' },
+                '& .MuiLinearProgress-bar': {
+                  borderTopRightRadius: 10,
+                  borderBottomRightRadius: 0
+                }
+              }}
+            />
+            <Typography variant='body2' sx={{ color: 'text.disabled' }}>
+              16th September 2023, 11:30am
+            </Typography>
+          </div>
+        </Box>
         <Box sx={{ gap: 2, mb: 5, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div>
             <Typography variant='body2' sx={{ color: 'text.disabled' }}>
@@ -65,7 +86,7 @@ const AnalyticsOrderVisits = () => {
           color='info'
           variant='determinate'
           sx={{
-            height: 10,
+            height: 2,
             '&.MuiLinearProgress-colorInfo': { backgroundColor: 'primary.main' },
             '& .MuiLinearProgress-bar': {
               borderTopRightRadius: 0,

@@ -3,6 +3,7 @@ const navigation = () => {
     {
       title: 'Dashboards',
       icon: 'tabler:smart-home',
+
       //badgeContent: 'new',
       //badgeColor: 'error',
       children: [
@@ -10,6 +11,7 @@ const navigation = () => {
           title: 'Nursing at Home',
           path: '/dashboards/analytics'
         }
+
         /*
         {
           title: 'CRM',
@@ -25,6 +27,7 @@ const navigation = () => {
     {
       sectionTitle: 'User Roles & Permissions'
     },
+
     /*
     {
       title: 'Email',
@@ -107,6 +110,7 @@ const navigation = () => {
         }
       ]
     },
+
     /*
     {
       title: 'Pages',
@@ -548,6 +552,7 @@ const navigation = () => {
     {
       sectionTitle: 'Access Control'
     },
+
     /*
     {
       title: 'Charts',
@@ -575,6 +580,7 @@ const navigation = () => {
       icon: 'tabler:shield',
       title: 'Access Control'
     }
+
     /*
     {
       title: 'Others',
