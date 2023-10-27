@@ -715,6 +715,13 @@ const searchData = [
     icon: 'tabler:shield',
     title: 'Access Control (ACL)',
     category: 'chartsMisc'
+  },
+  {
+    id: 102,
+    url: '/terms',
+    icon: 'tabler:shield',
+    title: 'Terms and Conditions',
+    category: 'chartsMisc'
   }
 ]
 

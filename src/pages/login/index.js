@@ -272,7 +272,7 @@ const LoginPage = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
                 <Typography href='/register' component={LinkStyled}>
-                  Create an account
+                  Sign Up (Patient Intake Form)
                 </Typography>
               </Box>
               <Divider
