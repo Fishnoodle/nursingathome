@@ -12,17 +12,25 @@ const users = [
     id: 1,
     role: 'admin',
     password: 'nurse',
-    fullName: 'Jane Doe',
-    username: 'janedoe',
-    email: 'test@nursingathome.com'
+    fullName: 'Nurse Name',
+    username: 'nurse',
+    email: 'nurse@nursingathome.com'
   },
   {
     id: 1,
-    role: 'client',
-    password: 'client',
-    fullName: 'John Doe',
-    username: 'johndoe',
-    email: 'test@nursingathome.com'
+    role: 'admin',
+    password: 'doctor',
+    fullName: 'Doctor Name',
+    username: 'doctor',
+    email: 'doctor@nursingathome.com'
+  },
+  {
+    id: 1,
+    role: 'admin',
+    password: 'patient',
+    fullName: 'Patient Name',
+    username: 'patient',
+    email: 'patient@nursingathome.com'
   }
 ]
 

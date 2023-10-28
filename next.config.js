@@ -2,6 +2,9 @@
 const path = require('path')
 
 /** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export'
+}
 
 // Remove this if you're not using Fullcalendar features
 

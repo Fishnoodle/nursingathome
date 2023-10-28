@@ -717,11 +717,25 @@ const searchData = [
     category: 'chartsMisc'
   },
   {
-    id: 102,
+    id: 103,
     url: '/terms',
     icon: 'tabler:shield',
     title: 'Terms and Conditions',
+    category: 'appsPages'
+  },
+  {
+    id: 104,
+    url: '/nurselogin',
+    icon: 'tabler:login',
+    title: 'Nurse Login',
     category: 'chartsMisc'
+  },
+  {
+    id: 105,
+    url: '/doctorlogin',
+    icon: 'tabler:login',
+    title: 'Doctor Login',
+    category: 'appsPages'
   }
 ]
 

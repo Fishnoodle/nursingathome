@@ -86,8 +86,8 @@ const schema = yup.object().shape({
 })
 
 const defaultValues = {
-  password: 'patient',
-  email: 'patient@nursingathome.com'
+  password: 'nurse',
+  email: 'nurse@nursingathome.com'
 }
 
 const LoginPage = () => {
@@ -189,12 +189,12 @@ const LoginPage = () => {
                 {`Welcome to ${themeConfig.templateName}! 👋🏻`}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                Please sign-in to view your respective Dashboard - PATIENT LOGIN
+                Please sign-in to view your respective Dashboard - NURSE LOGIN
               </Typography>
             </Box>
             <Alert icon={false} sx={{ py: 2, mb: 4, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
               <Typography variant='body2' sx={{ mb: 2, color: 'primary.main' }}>
-                Patient: <strong>patient@nursingathome.com</strong> / Pass: <strong>patient</strong>
+                Nurses: <strong>test@nursingathome.com</strong> / Pass: <strong>nurse</strong>
               </Typography>
             </Alert>
             <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
@@ -211,7 +211,7 @@ const LoginPage = () => {
                       value={value}
                       onBlur={onBlur}
                       onChange={onChange}
-                      placeholder='patient@nursingathome.com'
+                      placeholder='nurse@nursingathome.com'
                       error={Boolean(errors.email)}
                       {...(errors.email && { helperText: errors.email.message })}
                     />
@@ -271,12 +271,6 @@ const LoginPage = () => {
               <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
                 Login
               </Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
-                <Typography href='/register' component={LinkStyled}>
-                  Sign Up (Patient Intake Form)
-                </Typography>
-              </Box>
               <Divider
                 sx={{
                   color: 'text.disabled',
