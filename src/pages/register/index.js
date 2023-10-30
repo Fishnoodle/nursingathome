@@ -30,12 +30,9 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 // ** Hooks
 import { useSettings } from 'src/@core/hooks/useSettings'
 
-// ** Demo Imports
-import FooterIllustrationsV2 from 'src/views/pages/auth/FooterIllustrationsV2'
-
 // ** React Imports + New MUI
 import * as React from 'react'
-import { FormControl, FormLabel, MenuItem, RadioGroup } from '@mui/material'
+import { Dialog, DialogTitle, FormControl, FormLabel, MenuItem, RadioGroup } from '@mui/material'
 import Radio from '@mui/material/Radio'
 import InputLabel from '@mui/material/InputLabel'
 
@@ -44,6 +41,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import dayjs from 'dayjs'
+
+// ** Terms and Conditoins Import
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import Slide from '@mui/material/Slide'
 
 // ** Styled Components
 import { Select } from '@mui/base/Select'
@@ -103,12 +106,26 @@ const Register = () => {
   const { skin } = settings
   const imageSource = skin === 'bordered' ? 'auth-v2-register-illustration-bordered' : 'auth-v2-register-illustration'
 
-  // ** Radio Button - Marital Status
-  const [value, setValue] = useState('married')
+  // ** Radio Button = Gender
+  const [gender, setGender] = useState('invalid')
 
-  const handleChangeMarital = event => {
-    setValue(event.target.value)
+  const handleChangeGender = genderevent => {
+    setValue(genderevent.target.value)
   }
+
+  // ** Radio Button - Marital Status
+  const [marital, setMarital] = useState('invalid')
+
+  const handleChangeMarital = maritalevent => {
+    setMarital(maritalevent.target.value)
+  }
+
+  // ** Radio Button - Alcohol Use
+  const [alcohol, setAlcohol] = useState('invalid')
+
+  // ** Radio Button - Alcohol Use
+
+  // ** Radio Button - Alcohol Use
 
   // ** DatePicker
   const date = new Date().toLocaleDateString
@@ -120,10 +137,59 @@ const Register = () => {
   var year = age_dt.getUTCFullYear()
   var age = Math.abs(year - 1970)
 
+  // ** lbs to kg calculator (vice-versa)
+
   // ** Height (Feet and Inches Values)
   const feet_value = [3, 4, 5, 6, 7, 8]
+  const [feet, setFeet] = useState('invalid')
+
+  const handleChangeFeet = feetevent => {
+    setValue(feetevent.target.value)
+  }
 
   const inches_value = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+  // ** Terms and Condition
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction='up' ref={ref} {...props} />
+  })
+
+  const [open, setOpen] = React.useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const terms_dialog1 =
+    "I give FOREMED Family Physicians or it's assignees the authority to review my medication list on Medinet/Pharmanet and obtain relevant medical records from other healthcare providers/institutions."
+
+  const terms_dialog2 =
+    'I understand that after-hours emergencies need to be taken care of in the Emergency Room and that if I need urgent medical care I need to go to a walk-in clinic or the Emergency room.'
+
+  const terms_dialog3 =
+    'I will not compound multiple medical issues in an appointment as this leads to poor care and not enough time to discuss issues appropriately. I will make an agenda with my doctor for all my issues at the start of the appointment.'
+
+  const terms_dialog4 =
+    'I am responsible for ALL test results. I will make separate follow-up appointments to discuss all test results with the doc.'
+
+  const terms_dialog5 =
+    'I understand that 24-hour notice is required for appointment cancellation, otherwise, I will be responsible for the payment of a cancellation fee ($50 charge) prior to my next visit. Any overdue fees must be paid prior to seeing the doctor. I understand that if I have 3 no-shows to this office we have the right to close your file.'
+
+  const terms_dialog6 =
+    'I agree to email, text, and telehealth communication and understand that my info can be intercepted and sent/used by another individual in harmful ways.'
+
+  const terms_dialog7 =
+    'Patients acknowledge that they may occasionally be assessed and treated by a medical learned (i.e. resident/nurse practitioner student) as this is a clinic involved in training future health care providers.'
+
+  const terms_dialog8 =
+    'I agree to Respect the Clinic staff and refrain from any form of verbal or physical aggression or harassment.'
+
+  const terms_dialog9 =
+    'A positive therapeutic relationship relies on mutual trust and respect between the patient and the doctor/staff. If this foundation is lost, a productive therapeutic relationship may no longer be possible, and either the patient or the doctor may choose to terminate this doctor-patient relationship which will involve the patient seeking medical care elsewhere.'
 
   return (
     <Box
@@ -160,6 +226,8 @@ const Register = () => {
               >
                 Basic Information
               </Divider>
+
+              {/* Patient First and Last Name */}
               <Grid container spacing={6}>
                 <Grid item xs={6}>
                   <CustomTextField
@@ -179,19 +247,37 @@ const Register = () => {
                     placeholder='Last Name'
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker label='Date of Birth' value={dob} onChange={dob => setDob(dob)} />
-                    <Typography> Age: {(age = age || 0)}</Typography>
-                  </LocalizationProvider>
+
+                {/* Gender */}
+                <Grid item xs={12}>
+                  <FormControl>
+                    <FormLabel>Gender (pleaes choose one)</FormLabel>
+                    <RadioGroup row name='gender' value={gender} onChange={handleChangeGender}>
+                      <FormControlLabel value='male' control={<Radio />} label='Male' />
+                      <FormControlLabel value='female' control={<Radio />} label='Female' />
+                      <FormControlLabel value='other' control={<Radio />} label='Other' />
+                      <FormControlLabel value='prefer-no-to-say' control={<Radio />} label='Prefer not to say' />
+                    </RadioGroup>
+                  </FormControl>
                 </Grid>
+
+                {/* Height (Feet & Inches) */}
+
+                {/* Email */}
+                <Grid item xs={6}>
+                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Email' placeholder='johnsmith@email.com' />
+                </Grid>
+
+                {/* Carecard */}
                 <Grid item xs={6}>
                   <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Care Card #' placeholder='999999999' />
                 </Grid>
+
+                {/* Weight (kg) */}
                 <Grid item xs={6}>
                   <FormControl sx={{ mb: 4 }} variant='outlined'>
                     <OutlinedInput
-                      id='outlined-adornment-weight'
+                      id='kg_lbs_calc'
                       endAdornment={<InputAdornment position='end'>kg</InputAdornment>}
                       aria-describedby='outlined-weight-helper-text'
                       inputProps={{
@@ -201,9 +287,30 @@ const Register = () => {
                     <FormHelperText id='outlined-weight-helper-text'>Weight</FormHelperText>
                   </FormControl>
                 </Grid>
+
+                {/* Weight (lbs) */}
                 <Grid item xs={6}>
-                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Email' placeholder='johnsmith@email.com' />
+                  <FormControl sx={{ mb: 4 }} variant='outlined'>
+                    <OutlinedInput
+                      id='lbs_kg_calc'
+                      endAdornment={<InputAdornment position='end'>lbs</InputAdornment>}
+                      aria-describedby='outlined-weight-helper-text'
+                      inputProps={{
+                        'aria-label': 'weight'
+                      }}
+                    />
+                  </FormControl>
                 </Grid>
+
+                {/* Date of Birth + Age */}
+                <Grid item xs={6}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker label='Date of Birth' value={dob} onChange={dob => setDob(dob)} />
+                    <Typography> Age: {(age = age || 0)}</Typography>
+                  </LocalizationProvider>
+                </Grid>
+
+                {/* Address */}
                 <Grid item xs={6}>
                   <CustomTextField
                     autoFocus
@@ -213,9 +320,13 @@ const Register = () => {
                     placeholder='1234 Smith Street'
                   />
                 </Grid>
+
+                {/* Postal Code */}
                 <Grid item xs={6}>
                   <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Postal Code' placeholder='153 VGA' />
                 </Grid>
+
+                {/* Phone Number (Home) */}
                 <Grid item xs={6}>
                   <CustomTextField
                     autoFocus
@@ -225,6 +336,8 @@ const Register = () => {
                     placeholder='(604) 123-4567'
                   />
                 </Grid>
+
+                {/* Phone Number (Cell) */}
                 <Grid item xs={6}>
                   <CustomTextField
                     autoFocus
@@ -234,6 +347,8 @@ const Register = () => {
                     placeholder='(778) 123-4567'
                   />
                 </Grid>
+
+                {/* Family Doctor */}
                 <Grid item xs={6}>
                   <CustomTextField
                     autoFocus
@@ -264,19 +379,29 @@ const Register = () => {
               >
                 Social History
               </Divider>
-              <FormControl>
-                <FormLabel>Marital Status (please choose one)</FormLabel>
-                <RadioGroup row name='marital-status' value={value} onChange={handleChangeMarital}>
-                  <FormControlLabel value='married' control={<Radio />} label='Married' />
-                  <FormControlLabel value='single' control={<Radio />} label='Single' />
-                  <FormControlLabel value='common-law' control={<Radio />} label='Common Law' />
-                  <FormControlLabel value='divorced' control={<Radio />} label='Divorced' />
-                </RadioGroup>
-              </FormControl>
 
-              <Grid item xs={6}>
+              <Grid item xs={12}>
+                <FormControl>
+                  <FormLabel>Marital Status (please choose one)</FormLabel>
+                  <RadioGroup row name='marital-status' value={marital} onChange={handleChangeMarital}>
+                    <FormControlLabel value='married' control={<Radio />} label='Married' />
+                    <FormControlLabel value='single' control={<Radio />} label='Single' />
+                    <FormControlLabel value='common-law' control={<Radio />} label='Common Law' />
+                    <FormControlLabel value='divorced' control={<Radio />} label='Divorced' />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+
+              {/* Occupation */}
+              <Grid item xs={12}>
                 <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Occupation' placeholder='Job Title' />
               </Grid>
+
+              {/* Alcohol Use */}
+              <Grid item xs={12}>
+                <FormLabel>Alcohol Use</FormLabel>
+              </Grid>
+
               <Divider
                 sx={{
                   color: 'text.disabled',
@@ -319,6 +444,7 @@ const Register = () => {
                   </Box>
                 }
               />
+
               <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
                 Sign up
               </Button>
