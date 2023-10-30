@@ -182,14 +182,14 @@ const Register = () => {
                 <Grid item xs={6}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker label='Date of Birth' value={dob} onChange={dob => setDob(dob)} />
-                    <Typography> Age: {age}</Typography>
+                    <Typography> Age: {(age = age || 0)}</Typography>
                   </LocalizationProvider>
                 </Grid>
-                <Grid item xs={6} spacing={2}>
+                <Grid item xs={6}>
                   <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Care Card #' placeholder='999999999' />
                 </Grid>
                 <Grid item xs={6}>
-                  <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+                  <FormControl sx={{ mb: 4 }} variant='outlined'>
                     <OutlinedInput
                       id='outlined-adornment-weight'
                       endAdornment={<InputAdornment position='end'>kg</InputAdornment>}
@@ -200,6 +200,48 @@ const Register = () => {
                     />
                     <FormHelperText id='outlined-weight-helper-text'>Weight</FormHelperText>
                   </FormControl>
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Email' placeholder='johnsmith@email.com' />
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomTextField
+                    autoFocus
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Home Address'
+                    placeholder='1234 Smith Street'
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Postal Code' placeholder='153 VGA' />
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomTextField
+                    autoFocus
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Phone Number (Home)'
+                    placeholder='(604) 123-4567'
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomTextField
+                    autoFocus
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Phone Number (Cell)'
+                    placeholder='(778) 123-4567'
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomTextField
+                    autoFocus
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Family Doctor'
+                    placeholder='Dr. John Smith'
+                  />
                 </Grid>
               </Grid>
               <Divider

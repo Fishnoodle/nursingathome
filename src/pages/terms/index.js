@@ -151,6 +151,9 @@ const Terms = () => {
               involve the patient seeking medical care elsewhere.
             </Typography>
           </Box>
+          <Button variant='contained' href='/register'>
+            Back
+          </Button>
         </Box>
       </Box>
     </Box>
