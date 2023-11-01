@@ -125,6 +125,11 @@ const Register = () => {
 
   const handleChangeAlcohol = alcohol => {
     setAlcohol(alcohol.target.value)
+    if (alcohol.target.value == 'yes') {
+      console.log('VISIBILITY Al')
+    } else {
+      console.log('REMOVE VISIBILITY Al')
+    }
   }
 
   // ** Radio Button - Cigarette Use
@@ -132,6 +137,11 @@ const Register = () => {
 
   const handleChangeCigarette = cigarette => {
     setCigarette(cigarette.target.value)
+    if (cigarette.target.value == 'yes') {
+      console.log('VISIBILITY Cg')
+    } else {
+      console.log('REMOVE VISIBILITY Cg')
+    }
   }
 
   // ** Radio Button - Recreational Drug Use
@@ -139,6 +149,11 @@ const Register = () => {
 
   const handleChangeDrug = drug => {
     setDrug(drug.target.value)
+    if (drug.target.value == 'yes') {
+      console.log('VISIBILITY Dr')
+    } else {
+      console.log('REMOVE VISIBILITY Dr')
+    }
   }
 
   // ** Past History checkbox
