@@ -110,7 +110,7 @@ const Register = () => {
   const [gender, setGender] = useState('invalid')
 
   const handleChangeGender = genderevent => {
-    setValue(genderevent.target.value)
+    setGender(genderevent.target.value)
   }
 
   // ** Radio Button - Marital Status
@@ -310,6 +310,7 @@ const Register = () => {
                   <CustomTextField
                     autoFocus
                     fullWidth
+                    required
                     sx={{ mb: 4 }}
                     label='Patient First Name'
                     placeholder='First Name'
@@ -319,6 +320,7 @@ const Register = () => {
                   <CustomTextField
                     autoFocus
                     fullWidth
+                    required
                     sx={{ mb: 4 }}
                     label='Patient Last Name'
                     placeholder='Last Name'
@@ -327,7 +329,7 @@ const Register = () => {
 
                 {/* Gender */}
                 <Grid item xs={12}>
-                  <FormControl>
+                  <FormControl required>
                     <FormLabel>Gender (pleaes choose one)</FormLabel>
                     <RadioGroup row name='gender' value={gender} onChange={handleChangeGender}>
                       <FormControlLabel value='male' control={<Radio />} label='Male' />
@@ -342,17 +344,31 @@ const Register = () => {
 
                 {/* Email */}
                 <Grid item xs={6}>
-                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Email' placeholder='johnsmith@email.com' />
+                  <CustomTextField
+                    autoFocus
+                    required
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Email'
+                    placeholder='johnsmith@email.com'
+                  />
                 </Grid>
 
                 {/* Carecard */}
                 <Grid item xs={6}>
-                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Care Card #' placeholder='999999999' />
+                  <CustomTextField
+                    autoFocus
+                    required
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Care Card #'
+                    placeholder='999999999'
+                  />
                 </Grid>
 
                 {/* Weight (kg) */}
                 <Grid item xs={6}>
-                  <FormControl sx={{ mb: 4 }} variant='outlined'>
+                  <FormControl sx={{ mb: 4 }} required variant='outlined'>
                     <OutlinedInput
                       id='kg_lbs_calc'
                       endAdornment={<InputAdornment position='end'>kg</InputAdornment>}
@@ -382,7 +398,7 @@ const Register = () => {
                 {/* Date of Birth + Age */}
                 <Grid item xs={6}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker label='Date of Birth' value={dob} onChange={dob => setDob(dob)} />
+                    <DatePicker required label='Date of Birth' value={dob} onChange={dob => setDob(dob)} />
                     <Typography> Age: {(age = age || 0)}</Typography>
                   </LocalizationProvider>
                 </Grid>
@@ -392,6 +408,7 @@ const Register = () => {
                   <CustomTextField
                     autoFocus
                     fullWidth
+                    required
                     sx={{ mb: 4 }}
                     label='Home Address'
                     placeholder='1234 Smith Street'
@@ -400,7 +417,14 @@ const Register = () => {
 
                 {/* Postal Code */}
                 <Grid item xs={6}>
-                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Postal Code' placeholder='153 VGA' />
+                  <CustomTextField
+                    autoFocus
+                    required
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Postal Code'
+                    placeholder='153 VGA'
+                  />
                 </Grid>
 
                 {/* Phone Number (Home) */}
@@ -408,6 +432,7 @@ const Register = () => {
                   <CustomTextField
                     autoFocus
                     fullWidth
+                    required
                     sx={{ mb: 4 }}
                     label='Phone Number (Home)'
                     placeholder='(604) 123-4567'
@@ -419,6 +444,7 @@ const Register = () => {
                   <CustomTextField
                     autoFocus
                     fullWidth
+                    required
                     sx={{ mb: 4 }}
                     label='Phone Number (Cell)'
                     placeholder='(778) 123-4567'
@@ -430,6 +456,7 @@ const Register = () => {
                   <CustomTextField
                     autoFocus
                     fullWidth
+                    required
                     sx={{ mb: 4 }}
                     label='Family Doctor'
                     placeholder='Dr. John Smith'
