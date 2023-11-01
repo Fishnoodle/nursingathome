@@ -681,6 +681,26 @@ const Register = () => {
               <CustomTextField
                 fullWidth
                 label='Password'
+                sx={{ mb: 4 }}
+                id='auth-login-v2-password'
+                type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        edge='end'
+                        onMouseDown={e => e.preventDefault()}
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
+              <CustomTextField
+                fullWidth
+                label='Confirm Passowrd'
                 id='auth-login-v2-password'
                 type={showPassword ? 'text' : 'password'}
                 InputProps={{
