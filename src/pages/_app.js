@@ -56,6 +56,8 @@ import 'src/iconify-bundle/icons-bundle-react'
 // ** Global css styles
 import '../../styles/globals.css'
 
+/*
+
 // require database connection
 const dbConnect = require('./db/dbConnect')
 
@@ -105,6 +107,8 @@ app.post('/register', (request, response) => {
       })
     })
 })
+
+*/
 
 const clientSideEmotionCache = createEmotionCache()
 

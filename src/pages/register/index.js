@@ -123,9 +123,86 @@ const Register = () => {
   // ** Radio Button - Alcohol Use
   const [alcohol, setAlcohol] = useState('invalid')
 
-  // ** Radio Button - Alcohol Use
+  const handleChangeAlcohol = alcohol => {
+    setAlcohol(alcohol.target.value)
+  }
 
-  // ** Radio Button - Alcohol Use
+  // ** Radio Button - Cigarette Use
+  const [cigarette, setCigarette] = useState('invalid')
+
+  const handleChangeCigarette = cigarette => {
+    setCigarette(cigarette.target.value)
+  }
+
+  // ** Radio Button - Recreational Drug Use
+  const [drug, setDrug] = useState('invalid')
+
+  const handleChangeDrug = drug => {
+    setDrug(drug.target.value)
+  }
+
+  // ** Past History checkbox
+  const [state, setState] = useState({
+    bloodClots: false,
+    tuberculosis: false,
+    asthma: false,
+    thyroidDisease: false,
+    migraineHeadcahes: false,
+    seizures: false,
+    digestiveIssues: false,
+    fractures: false,
+    anemia: false,
+    heartDisease: false,
+    diabetes: false,
+    cancer: false,
+    hepatitis: false,
+    hiv: false,
+    other: false
+  })
+
+  const handleChangeHistory = historyevent => {
+    setState({
+      ...state,
+      [historyevent.target.name]: historyevent.target.checked
+    })
+  }
+
+  const {
+    bloodClots,
+    tuberculosis,
+    asthma,
+    thyroidDisease,
+    migraineHeadcahes,
+    seizures,
+    digestiveIssues,
+    fractures,
+    anemia,
+    heartDisease,
+    diabetes,
+    cancer,
+    hepatitis,
+    hiv,
+    other
+  } = state
+
+  // ** Vaccine checkbox
+  const [vaccines, setVaccines] = useState({
+    pneumovax: false,
+    tdap: false,
+    shingles: false,
+    flu: false,
+    vaccine: false,
+    covid: false
+  })
+
+  const handleChangeVaccines = vaccines => {
+    setVaccines({
+      ...state,
+      [vaccines.target.name]: vaccines.target.checked
+    })
+  }
+
+  const { pneumovax, tdap, shingles, flu, vaccine, covid } = state
 
   // ** DatePicker
   const date = new Date().toLocaleDateString
@@ -359,6 +436,7 @@ const Register = () => {
                   />
                 </Grid>
               </Grid>
+
               <Divider
                 sx={{
                   color: 'text.disabled',
@@ -369,6 +447,137 @@ const Register = () => {
               >
                 Medical Information
               </Divider>
+
+              <Grid container spacing={6}>
+                {/* Allergies */}
+                <Grid item xs={6}>
+                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Medication' placeholder='List' />
+                </Grid>
+
+                <Grid item xs={6}>
+                  <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} label='Reation' placeholder='List' />
+                </Grid>
+              </Grid>
+
+              {/* Current Medication/s & Dosages */}
+              <FormControl item xs={12}>
+                <FormLabel>Current Medication/s & Dosages</FormLabel>
+                <CustomTextField autoFocus fullWidth sx={{ mb: 4 }} placeholder='Medication | Dosage : Xmg' />
+              </FormControl>
+
+              {/* Past Medical History Checklist */}
+              <Grid container spacing={2}>
+                <FormControl>
+                  <FormLabel>Please check the ones that applicable to your Past Medical History:</FormLabel>
+                  <Grid container direction='row' justifyContent='center' alignItems='center'>
+                    <FormControlLabel
+                      control={<Checkbox checked={bloodClots} onChange={handleChangeHistory} name='bloodClots' />}
+                      label='Blood Clots'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={tuberculosis} onChange={handleChangeHistory} name='tuberculosis' />}
+                      label='Tuberculosis'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={asthma} onChange={handleChangeHistory} name='asthma' />}
+                      label='Asthma'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={thyroidDisease} onChange={handleChangeHistory} name='thyroidDisease' />
+                      }
+                      label='Thyroid Disease'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={migraineHeadcahes} onChange={handleChangeHistory} name='migraineHeadcahes' />
+                      }
+                      label='Migraine Headaches'
+                    />
+                  </Grid>
+                  <Grid container direction='row' justifyContent='center' alignItems='center'>
+                    <FormControlLabel
+                      control={<Checkbox checked={seizures} onChange={handleChangeHistory} name='seizures' />}
+                      label='Seizures'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={digestiveIssues} onChange={handleChangeHistory} name='digestiveIssues' />
+                      }
+                      label='Digestive Issues'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={fractures} onChange={handleChangeHistory} name='fractures' />}
+                      label='Fractures'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={anemia} onChange={handleChangeHistory} name='anemia' />}
+                      label='Anemia'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={heartDisease} onChange={handleChangeHistory} name='heartDisease' />}
+                      label='Heart Disease'
+                    />
+                  </Grid>
+
+                  <Grid container direction='row' justifyContent='center' alignItems='center'>
+                    <FormControlLabel
+                      control={<Checkbox checked={diabetes} onChange={handleChangeHistory} name='diabetes' />}
+                      label='Diabetes'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={cancer} onChange={handleChangeHistory} name='cancer' />}
+                      label='Cancer'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={hepatitis} onChange={handleChangeHistory} name='hepatitis' />}
+                      label='Hepatitis'
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={hiv} onChange={handleChangeHistory} name='hiv' />}
+                      label='HIV'
+                    />
+                  </Grid>
+                  <FormControlLabel
+                    control={<Checkbox checked={other} onChange={handleChangeHistory} name='other' />}
+                    label='Other'
+                  />
+                </FormControl>
+
+                {/* Vaccines Checklist*/}
+                <Grid container spacing={2}>
+                  <FormControl>
+                    <FormLabel>Vaccines - checkmart if have recieved</FormLabel>
+                    <Grid container direction='row' justifyContent='center' alignItems='center'>
+                      <FormControlLabel
+                        control={<Checkbox checked={pneumovax} onChange={handleChangeHistory} name='pneumovax' />}
+                        label='Pneumovax'
+                      />
+                      <FormControlLabel
+                        control={<Checkbox checked={tdap} onChange={handleChangeHistory} name='tdap' />}
+                        label='TDAP'
+                      />
+                      <FormControlLabel
+                        control={<Checkbox checked={shingles} onChange={handleChangeHistory} name='shingles' />}
+                        label='Shingles'
+                      />
+                      <FormControlLabel
+                        control={<Checkbox checked={flu} onChange={handleChangeHistory} name='flu' />}
+                        label='Flu'
+                      />
+                      <FormControlLabel
+                        control={<Checkbox checked={vaccine} onChange={handleChangeHistory} name='vaccine' />}
+                        label='Vaccine'
+                      />
+                      <FormControlLabel
+                        control={<Checkbox checked={covid} onChange={handleChangeHistory} name='covid' />}
+                        label='Covid'
+                      />
+                    </Grid>
+                  </FormControl>
+                </Grid>
+              </Grid>
+
               <Divider
                 sx={{
                   color: 'text.disabled',
@@ -380,6 +589,7 @@ const Register = () => {
                 Social History
               </Divider>
 
+              {/* Marital Status Radio Button */}
               <Grid item xs={12}>
                 <FormControl>
                   <FormLabel>Marital Status (please choose one)</FormLabel>
@@ -399,7 +609,35 @@ const Register = () => {
 
               {/* Alcohol Use */}
               <Grid item xs={12}>
-                <FormLabel>Alcohol Use</FormLabel>
+                <FormControl>
+                  <FormLabel>Alcohol Use</FormLabel>
+                  <RadioGroup row name='alcohol-use' value={alcohol} onChange={handleChangeAlcohol}>
+                    <FormControlLabel value='yes' control={<Radio />} label='Yes' />
+                    <FormControlLabel value='no' control={<Radio />} label='No' />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+
+              {/* Cigarette Use */}
+              <Grid item xs={12}>
+                <FormControl>
+                  <FormLabel>Cigarette Use</FormLabel>
+                  <RadioGroup row name='cigarette-use' value={cigarette} onChange={handleChangeCigarette}>
+                    <FormControlLabel value='yes' control={<Radio />} label='Yes' />
+                    <FormControlLabel value='no' control={<Radio />} label='No' />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+
+              {/* Recreational Drugs */}
+              <Grid item xs={12}>
+                <FormControl>
+                  <FormLabel>Recreational Drugs</FormLabel>
+                  <RadioGroup row name='drug-use' value={drug} onChange={handleChangeDrug}>
+                    <FormControlLabel value='yes' control={<Radio />} label='Yes' />
+                    <FormControlLabel value='no' control={<Radio />} label='No' />
+                  </RadioGroup>
+                </FormControl>
               </Grid>
 
               <Divider
