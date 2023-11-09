@@ -271,6 +271,12 @@ const LoginPage = () => {
               <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
                 Login
               </Button>
+              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
+                <Typography href='/registration' component={LinkStyled}>
+                  Sign Up
+                </Typography>
+              </Box>
               <Divider
                 sx={{
                   color: 'text.disabled',

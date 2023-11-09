@@ -736,6 +736,13 @@ const searchData = [
     icon: 'tabler:login',
     title: 'Doctor Login',
     category: 'appsPages'
+  },
+  {
+    id: 106,
+    url: '/registration',
+    icon: 'tabler:login',
+    title: 'Registration for Nurses/Doctors',
+    category: 'appsPages'
   }
 ]
 

@@ -53,6 +53,7 @@ import { Select } from '@mui/base/Select'
 
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormHelperText from '@mui/material/FormHelperText'
+import TextField from '@mui/material/TextField'
 
 const RegisterIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
@@ -678,6 +679,7 @@ const Register = () => {
                   <RadioGroup row name='drug-use' value={drug} onChange={handleChangeDrug}>
                     <FormControlLabel value='yes' control={<Radio />} label='Yes' />
                     <FormControlLabel value='no' control={<Radio />} label='No' />
+                    <TextField id='drugYes' disabled='false' sx={{ display: 'none' }} />
                   </RadioGroup>
                 </FormControl>
               </Grid>
