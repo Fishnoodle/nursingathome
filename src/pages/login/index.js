@@ -126,6 +126,29 @@ const LoginPage = () => {
   }
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
 
+  // MongoDB Login Auth
+  const [user, setUser] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleOnSubmit = async e => {
+    e.preventDefault()
+
+    let result = await fetch('http://localhost:5000/register', {
+      method: 'post',
+      body: JSON.stringify({ user, password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    result = await result.json()
+    console.warn(result)
+    if (result) {
+      alert('Data saved successfully')
+      setUser('')
+      setPassword('')
+    }
+  }
+
   return (
     <Box className='content-right' sx={{ backgroundColor: 'background.paper' }}>
       {!hidden ? (
@@ -203,12 +226,12 @@ const LoginPage = () => {
                   name='email'
                   control={control}
                   rules={{ required: true }}
-                  render={({ field: { value, onChange, onBlur } }) => (
+                  render={({ field: { user, onChange, onBlur } }) => (
                     <CustomTextField
                       fullWidth
                       autoFocus
                       label='Email'
-                      value={value}
+                      value={user}
                       onBlur={onBlur}
                       onChange={onChange}
                       placeholder='patient@nursingathome.com'
@@ -223,10 +246,10 @@ const LoginPage = () => {
                   name='password'
                   control={control}
                   rules={{ required: true }}
-                  render={({ field: { value, onChange, onBlur } }) => (
+                  render={({ field: { password, onChange, onBlur } }) => (
                     <CustomTextField
                       fullWidth
-                      value={value}
+                      value={password}
                       onBlur={onBlur}
                       label='Password'
                       onChange={onChange}
@@ -268,7 +291,7 @@ const LoginPage = () => {
                   Forgot Password?
                 </Typography>
               </Box>
-              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
+              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }} onClick={handleOnSubmit}>
                 Login
               </Button>
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
