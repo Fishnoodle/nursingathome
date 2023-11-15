@@ -65,7 +65,8 @@ app.post('/register', async (req, resp) => {
       console.log('User already register')
     }
   } catch (e) {
-    resp.send('Something Went Wrong')
+    resp.send('Something Went Wrong ...ffs man')
+    resp.send(e)
   }
 })
 app.listen(5000)

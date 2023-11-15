@@ -131,9 +131,12 @@ const LoginPage = () => {
   const [password, setPassword] = useState('')
 
   const handleOnSubmit = async e => {
+    console.log('BUTTON')
     e.preventDefault()
+    console.log(user)
+    console.log(password)
 
-    let result = await fetch('http://localhost:5000/register', {
+    let result = await fetch('http://127.0.0.1:5000/register', {
       method: 'post',
       body: JSON.stringify({ user, password }),
       headers: {
@@ -141,11 +144,14 @@ const LoginPage = () => {
       }
     })
     result = await result.json()
+    console.log(result)
     console.warn(result)
     if (result) {
       alert('Data saved successfully')
       setUser('')
       setPassword('')
+    } else {
+      console.log('IT DIDNT WORK BRUH')
     }
   }
 
@@ -212,7 +218,7 @@ const LoginPage = () => {
                 {`Welcome to ${themeConfig.templateName}! 👋🏻`}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                Please sign-in to view your respective Dashboard - PATIENT LOGIN
+                Please sign-in to view your respective Dashboard - PATIENT LOGIN (IN MONGODB PROCESS)
               </Typography>
             </Box>
             <Alert icon={false} sx={{ py: 2, mb: 4, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
@@ -220,7 +226,7 @@ const LoginPage = () => {
                 Patient: <strong>patient@nursingathome.com</strong> / Pass: <strong>patient</strong>
               </Typography>
             </Alert>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+            <form noValidate autoComplete='off'>
               <Box sx={{ mb: 4 }}>
                 <Controller
                   name='email'
