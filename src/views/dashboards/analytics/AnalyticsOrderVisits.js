@@ -19,8 +19,11 @@ const AnalyticsOrderVisits = () => {
         <Box>
           <div>
             <Typography variant='h4'> Nurses Blood Test Check-in w/ Nurse Josie Smith</Typography>
+            <Typography variant='body2' sx={{ color: 'text.disabled' }} p={2}>
+              16th September 2023, 11:30am
+            </Typography>
             <LinearProgress
-              value={65}
+              value={100}
               color='info'
               variant='determinate'
               sx={{
@@ -32,11 +35,15 @@ const AnalyticsOrderVisits = () => {
                 }
               }}
             />
-            <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-              16th September 2023, 11:30am
-            </Typography>
           </div>
         </Box>
+        <Box>
+          <div>
+            <p> Duration: 30 min </p>
+            <p> 12345 16th Street, Vancouver BC, V4K V4K </p>
+          </div>
+        </Box>
+        {/*
         <Box sx={{ gap: 2, mb: 5, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div>
             <Typography variant='body2' sx={{ color: 'text.disabled' }}>
@@ -94,6 +101,7 @@ const AnalyticsOrderVisits = () => {
             }
           }}
         />
+        */}
       </CardContent>
     </Card>
   )
