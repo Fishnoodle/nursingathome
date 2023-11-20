@@ -54,6 +54,7 @@ import { Select } from '@mui/base/Select'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormHelperText from '@mui/material/FormHelperText'
 import TextField from '@mui/material/TextField'
+import axios from 'axios'
 
 const RegisterIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
@@ -107,182 +108,29 @@ const Register = () => {
   const { skin } = settings
   const imageSource = skin === 'bordered' ? 'auth-v2-register-illustration-bordered' : 'auth-v2-register-illustration'
 
-  // ** Radio Button = Gender
-  const [gender, setGender] = useState('invalid')
-
-  const handleChangeGender = genderevent => {
-    setGender(genderevent.target.value)
-  }
-
-  // ** Radio Button - Marital Status
-  const [marital, setMarital] = useState('invalid')
-
-  const handleChangeMarital = maritalevent => {
-    setMarital(maritalevent.target.value)
-  }
-
-  // ** Radio Button - Alcohol Use
-  const [alcohol, setAlcohol] = useState('invalid')
-
-  const handleChangeAlcohol = alcohol => {
-    setAlcohol(alcohol.target.value)
-    if (alcohol.target.value == 'yes') {
-      console.log('VISIBILITY Al')
-    } else {
-      console.log('REMOVE VISIBILITY Al')
-    }
-  }
-
-  // ** Radio Button - Cigarette Use
-  const [cigarette, setCigarette] = useState('invalid')
-
-  const handleChangeCigarette = cigarette => {
-    setCigarette(cigarette.target.value)
-    if (cigarette.target.value == 'yes') {
-      console.log('VISIBILITY Cg')
-    } else {
-      console.log('REMOVE VISIBILITY Cg')
-    }
-  }
-
-  // ** Radio Button - Recreational Drug Use
-  const [drug, setDrug] = useState('invalid')
-
-  const handleChangeDrug = drug => {
-    setDrug(drug.target.value)
-    if (drug.target.value == 'yes') {
-      console.log('VISIBILITY Dr')
-    } else {
-      console.log('REMOVE VISIBILITY Dr')
-    }
-  }
-
-  // ** Past History checkbox
-  const [state, setState] = useState({
-    bloodClots: false,
-    tuberculosis: false,
-    asthma: false,
-    thyroidDisease: false,
-    migraineHeadcahes: false,
-    seizures: false,
-    digestiveIssues: false,
-    fractures: false,
-    anemia: false,
-    heartDisease: false,
-    diabetes: false,
-    cancer: false,
-    hepatitis: false,
-    hiv: false,
-    other: false
-  })
-
-  const handleChangeHistory = historyevent => {
-    setState({
-      ...state,
-      [historyevent.target.name]: historyevent.target.checked
+  const Register = () => {
+    const [user, setUser] = useState({
+      name: '',
+      email: '',
+      password: ''
     })
+
+    const handleChange = e => {
+      const { name, value } = e.target
+      setUser({
+        ...user, //spread operator
+        [name]: value
+      })
+    }
   }
 
-  const {
-    bloodClots,
-    tuberculosis,
-    asthma,
-    thyroidDisease,
-    migraineHeadcahes,
-    seizures,
-    digestiveIssues,
-    fractures,
-    anemia,
-    heartDisease,
-    diabetes,
-    cancer,
-    hepatitis,
-    hiv,
-    other
-  } = state
-
-  // ** Vaccine checkbox
-  const [vaccines, setVaccines] = useState({
-    pneumovax: false,
-    tdap: false,
-    shingles: false,
-    flu: false,
-    vaccine: false,
-    covid: false
-  })
-
-  const handleChangeVaccines = vaccines => {
-    setVaccines({
-      ...state,
-      [vaccines.target.name]: vaccines.target.checked
-    })
+  //register function
+  const egister = () => {
+    const { name, email, password } = user
+    if (name && email && password) {
+      axios.post
+    }
   }
-
-  const { pneumovax, tdap, shingles, flu, vaccine, covid } = state
-
-  // ** DatePicker
-  const date = new Date().toLocaleDateString
-  const [dob, setDob] = useState(dayjs(date))
-
-  // ** Calcualtes age
-  var month_diff = Date.now() - dob.$d.getTime()
-  var age_dt = new Date(month_diff)
-  var year = age_dt.getUTCFullYear()
-  var age = Math.abs(year - 1970)
-
-  // ** lbs to kg calculator (vice-versa)
-
-  // ** Height (Feet and Inches Values)
-  const feet_value = [3, 4, 5, 6, 7, 8]
-  const [feet, setFeet] = useState('invalid')
-
-  const handleChangeFeet = feetevent => {
-    setValue(feetevent.target.value)
-  }
-
-  const inches_value = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-
-  // ** Terms and Condition
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction='up' ref={ref} {...props} />
-  })
-
-  const [open, setOpen] = React.useState(false)
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const terms_dialog1 =
-    "I give FOREMED Family Physicians or it's assignees the authority to review my medication list on Medinet/Pharmanet and obtain relevant medical records from other healthcare providers/institutions."
-
-  const terms_dialog2 =
-    'I understand that after-hours emergencies need to be taken care of in the Emergency Room and that if I need urgent medical care I need to go to a walk-in clinic or the Emergency room.'
-
-  const terms_dialog3 =
-    'I will not compound multiple medical issues in an appointment as this leads to poor care and not enough time to discuss issues appropriately. I will make an agenda with my doctor for all my issues at the start of the appointment.'
-
-  const terms_dialog4 =
-    'I am responsible for ALL test results. I will make separate follow-up appointments to discuss all test results with the doc.'
-
-  const terms_dialog5 =
-    'I understand that 24-hour notice is required for appointment cancellation, otherwise, I will be responsible for the payment of a cancellation fee ($50 charge) prior to my next visit. Any overdue fees must be paid prior to seeing the doctor. I understand that if I have 3 no-shows to this office we have the right to close your file.'
-
-  const terms_dialog6 =
-    'I agree to email, text, and telehealth communication and understand that my info can be intercepted and sent/used by another individual in harmful ways.'
-
-  const terms_dialog7 =
-    'Patients acknowledge that they may occasionally be assessed and treated by a medical learned (i.e. resident/nurse practitioner student) as this is a clinic involved in training future health care providers.'
-
-  const terms_dialog8 =
-    'I agree to Respect the Clinic staff and refrain from any form of verbal or physical aggression or harassment.'
-
-  const terms_dialog9 =
-    'A positive therapeutic relationship relies on mutual trust and respect between the patient and the doctor/staff. If this foundation is lost, a productive therapeutic relationship may no longer be possible, and either the patient or the doctor may choose to terminate this doctor-patient relationship which will involve the patient seeking medical care elsewhere.'
 
   return (
     <Box
@@ -304,7 +152,7 @@ const Register = () => {
           <Box sx={{ width: '100%', maxWidth: 750 }}>
             <Box sx={{ my: 6 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
-                Patient Intake Form
+                Registration Form
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>Please fill in the information below correctly</Typography>
             </Box>
@@ -330,6 +178,7 @@ const Register = () => {
                     sx={{ mb: 4 }}
                     label='First Name'
                     placeholder='First Name'
+                    name='first_name'
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -340,6 +189,7 @@ const Register = () => {
                     sx={{ mb: 4 }}
                     label='Last Name'
                     placeholder='Last Name'
+                    name='last_name'
                   />
                 </Grid>
 
@@ -352,6 +202,30 @@ const Register = () => {
                     sx={{ mb: 4 }}
                     label='Email'
                     placeholder='johnsmith@email.com'
+                    name='email'
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <CustomTextField
+                    fullWidth
+                    label='Password'
+                    sx={{ mb: 4 }}
+                    id='auth-login-v2-password'
+                    type={showPassword ? 'text' : 'password'}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            edge='end'
+                            onMouseDown={e => e.preventDefault()}
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
+                    name='password'
                   />
                 </Grid>
               </Grid>
