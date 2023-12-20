@@ -22,7 +22,33 @@ import KeenSliderWrapper from 'src/@core/styles/libs/keen-slider'
 import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import CardStatsWithAreaChart from 'src/@core/components/card-statistics/card-stats-with-area-chart'
 
+import jwt from 'jsonwebtoken'
+
 const AnalyticsDashboard = () => {
+  async function populateQuote() {
+    const req = await fetch('http://localhost:1337/api/quote', {
+      headers: {
+        'x-access-token': localStorage.getItem('token')
+      }
+    })
+
+    const data = req.json()
+    console.log(data)
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const user = jwt.decode(token)
+      if (!user) {
+        localStorage.removeItem('token')
+        history.replace('/login')
+      } else {
+        populateQuote()
+      }
+    }
+  }, [])
+
   return (
     <ApexChartWrapper>
       <KeenSliderWrapper>

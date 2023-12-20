@@ -115,7 +115,7 @@ const LoginPage = () => {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = data => {
+  /*const onSubmit = data => {
     const { email, password } = data
     auth.login({ email, password, rememberMe }, () => {
       setError('email', {
@@ -124,7 +124,43 @@ const LoginPage = () => {
       })
     })
   }
+  */
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  //MERN Stack - Login API
+  async function loginUser(event) {
+    event.preventDefault()
+
+    const response = await fetch('http://localhost:1337/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    })
+
+    const data = await response.json()
+
+    if (data.user) {
+      alert('Login successful')
+      console.log(email, password)
+      auth.login({ email, password }, () => {
+        setError('email', {
+          type: 'manual',
+          message: 'Email or Password is invalid'
+        })
+      })
+      //window.location.href = '/dashboards/analytics/'
+    } else {
+      alert('Please check your username and password')
+    }
+  }
 
   return (
     <Box className='content-right' sx={{ backgroundColor: 'background.paper' }}>
@@ -197,7 +233,7 @@ const LoginPage = () => {
                 Doctor: <strong>doctor@nursingathome.com</strong> / Pass: <strong>doctor</strong>
               </Typography>
             </Alert>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+            <form noValidate autoComplete='off' onSubmit={loginUser}>
               <Box sx={{ mb: 4 }}>
                 <Controller
                   name='email'
@@ -208,9 +244,9 @@ const LoginPage = () => {
                       fullWidth
                       autoFocus
                       label='Email'
-                      value={value}
                       onBlur={onBlur}
-                      onChange={onChange}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                       placeholder='doctor@nursingathome.com'
                       error={Boolean(errors.email)}
                       {...(errors.email && { helperText: errors.email.message })}
@@ -226,10 +262,10 @@ const LoginPage = () => {
                   render={({ field: { value, onChange, onBlur } }) => (
                     <CustomTextField
                       fullWidth
-                      value={value}
                       onBlur={onBlur}
                       label='Password'
-                      onChange={onChange}
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
                       id='auth-login-v2-password'
                       error={Boolean(errors.password)}
                       {...(errors.password && { helperText: errors.password.message })}

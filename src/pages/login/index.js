@@ -135,24 +135,6 @@ const LoginPage = () => {
     e.preventDefault()
     console.log(user)
     console.log(password)
-
-    let result = await fetch('http://127.0.0.1:5000/register', {
-      method: 'post',
-      body: JSON.stringify({ user, password }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    result = await result.json()
-    console.log(result)
-    console.warn(result)
-    if (result) {
-      alert('Data saved successfully')
-      setUser('')
-      setPassword('')
-    } else {
-      console.log('IT DIDNT WORK BRUH')
-    }
   }
 
   return (

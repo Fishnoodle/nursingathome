@@ -132,6 +132,35 @@ const Register = () => {
     }
   }
 
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  //MERN Stack - Register API
+  async function registerUser(event) {
+    event.preventDefault()
+
+    const response = await fetch('http://localhost:1337/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        password
+      })
+    })
+
+    const data = await response.json()
+
+    if (data.status === 'ok') {
+      window.location.href = '/doctorlogin'
+    }
+  }
+
   return (
     <Box
       className='content-center'
@@ -152,94 +181,104 @@ const Register = () => {
           <Box sx={{ width: '100%', maxWidth: 750 }}>
             <Box sx={{ my: 6 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
-                Registration Form
+                Registration Form - MONGODB IN TESTING
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>Please fill in the information below correctly</Typography>
             </Box>
-            <FormControl noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-              <Divider
-                sx={{
-                  color: 'text.disabled',
-                  '& .MuiDivider-wrapper': { px: 6 },
-                  fontSize: theme.typography.body2.fontSize,
-                  my: theme => `${theme.spacing(6)} !important`
-                }}
-              >
-                Basic Information
-              </Divider>
+            <form onSubmit={registerUser}>
+              <FormControl noValidate autoComplete='off' onSubmit={registerUser}>
+                <Divider
+                  sx={{
+                    color: 'text.disabled',
+                    '& .MuiDivider-wrapper': { px: 6 },
+                    fontSize: theme.typography.body2.fontSize,
+                    my: theme => `${theme.spacing(6)} !important`
+                  }}
+                >
+                  Basic Information
+                </Divider>
 
-              {/* Patient First and Last Name */}
-              <Grid container spacing={6}>
-                <Grid item xs={6}>
-                  <CustomTextField
-                    autoFocus
-                    fullWidth
-                    required
-                    sx={{ mb: 4 }}
-                    label='First Name'
-                    placeholder='First Name'
-                    name='first_name'
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <CustomTextField
-                    autoFocus
-                    fullWidth
-                    required
-                    sx={{ mb: 4 }}
-                    label='Last Name'
-                    placeholder='Last Name'
-                    name='last_name'
-                  />
+                {/* Patient First and Last Name */}
+                <Grid container spacing={6}>
+                  <Grid item xs={6}>
+                    <CustomTextField
+                      autoFocus
+                      fullWidth
+                      required
+                      sx={{ mb: 4 }}
+                      label='First Name'
+                      placeholder='First Name'
+                      name='first_name'
+                      value={firstname}
+                      onChange={e => setFirstname(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomTextField
+                      autoFocus
+                      fullWidth
+                      required
+                      sx={{ mb: 4 }}
+                      label='Last Name'
+                      placeholder='Last Name'
+                      name='last_name'
+                      value={lastname}
+                      onChange={e => setLastname(e.target.value)}
+                    />
+                  </Grid>
+
+                  {/* Email */}
+                  <Grid item xs={12}>
+                    <CustomTextField
+                      autoFocus
+                      required
+                      fullWidth
+                      sx={{ mb: 4 }}
+                      label='Email'
+                      placeholder='johnsmith@email.com'
+                      name='email'
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CustomTextField
+                      fullWidth
+                      label='Password'
+                      sx={{ mb: 4 }}
+                      id='auth-login-v2-password'
+                      type={showPassword ? 'text' : 'password'}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position='end'>
+                            <IconButton
+                              edge='end'
+                              onMouseDown={e => e.preventDefault()}
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
+                            </IconButton>
+                          </InputAdornment>
+                        )
+                      }}
+                      name='password'
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                    />
+                  </Grid>
                 </Grid>
 
-                {/* Email */}
-                <Grid item xs={12}>
-                  <CustomTextField
-                    autoFocus
-                    required
-                    fullWidth
-                    sx={{ mb: 4 }}
-                    label='Email'
-                    placeholder='johnsmith@email.com'
-                    name='email'
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <CustomTextField
-                    fullWidth
-                    label='Password'
-                    sx={{ mb: 4 }}
-                    id='auth-login-v2-password'
-                    type={showPassword ? 'text' : 'password'}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position='end'>
-                          <IconButton
-                            edge='end'
-                            onMouseDown={e => e.preventDefault()}
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }}
-                    name='password'
-                  />
-                </Grid>
-              </Grid>
-
-              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }} onClick='#'>
-                Sign up
-              </Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography sx={{ color: 'text.secondary', mr: 2 }}>Already have an account?</Typography>
-                <Typography component={LinkStyled} href='/login'>
-                  Sign in instead
-                </Typography>
-              </Box>
-            </FormControl>
+                <Button fullWidth type='submit' value='Register' variant='contained' sx={{ mb: 4 }}>
+                  Sign up
+                </Button>
+                <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <Typography sx={{ color: 'text.secondary', mr: 2 }}>Already have an account?</Typography>
+                  <Typography component={LinkStyled} href='/doctorlogin'>
+                    Sign in instead
+                  </Typography>
+                </Box>
+              </FormControl>
+            </form>
           </Box>
         </Box>
       </Box>
