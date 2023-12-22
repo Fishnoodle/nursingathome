@@ -150,7 +150,7 @@ const LoginPage = () => {
     if (data.user) {
       alert('Login successful')
       console.log(email, password)
-      auth.login({ email, password }, () => {
+      auth.login({ email, password, rememberMe }, () => {
         setError('email', {
           type: 'manual',
           message: 'Email or Password is invalid'

@@ -136,6 +136,7 @@ const Register = () => {
   const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const role = 'Doctor'
 
   //MERN Stack - Register API
   async function registerUser(event) {
@@ -150,7 +151,8 @@ const Register = () => {
         firstname,
         lastname,
         email,
-        password
+        password,
+        role
       })
     })
 
