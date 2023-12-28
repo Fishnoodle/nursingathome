@@ -1,4 +1,5 @@
 const express = require('express')
+
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -14,11 +15,11 @@ app.post('/api/register', async (req, res) => {
   console.log(req.body)
   try {
     const user = await User.create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
+      role: req.body.role,
       password: req.body.password,
-      role: req.body.role
+      fullName: req.body.fullName,
+      username: req.body.username,
+      email: req.body.email
     })
     res.json({ status: 'ok' })
   } catch (err) {
@@ -34,16 +35,7 @@ app.post('/api/login', async (req, res) => {
   })
 
   if (user) {
-    const token = jwt.sign(
-      {
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email
-      },
-      'dd5f3089-40c3-403d-af14-d0c228b05cb4',
-      { expiresIn: '5m' }
-    )
-    return res.json({ status: 'ok', user: token })
+    return res.json({ status: 'ok', user })
   } else {
     return res.json({ status: 'error', user: false })
   }

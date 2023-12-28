@@ -13,6 +13,8 @@ module.exports = {
   reactStrictMode: false,
   webpack: config => {
     config.resolve.alias = {
+      'mongodb-client-encryption': false,
+      aws4: false,
       ...config.resolve.alias,
       apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
     }

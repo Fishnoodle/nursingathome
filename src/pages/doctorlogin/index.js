@@ -134,32 +134,12 @@ const LoginPage = () => {
   async function loginUser(event) {
     event.preventDefault()
 
-    const response = await fetch('http://localhost:1337/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
-        password
+    auth.login({ email, password }, () => {
+      setError('email', {
+        type: 'manual',
+        message: 'Email or Password is invalid'
       })
     })
-
-    const data = await response.json()
-
-    if (data.user) {
-      alert('Login successful')
-      console.log(email, password)
-      auth.login({ email, password, rememberMe }, () => {
-        setError('email', {
-          type: 'manual',
-          message: 'Email or Password is invalid'
-        })
-      })
-      //window.location.href = '/dashboards/analytics/'
-    } else {
-      alert('Please check your username and password')
-    }
   }
 
   return (

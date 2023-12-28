@@ -124,16 +124,8 @@ const Register = () => {
     }
   }
 
-  //register function
-  const egister = () => {
-    const { name, email, password } = user
-    if (name && email && password) {
-      axios.post
-    }
-  }
-
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
+  const [fullName, setfullName] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const role = 'Doctor'
@@ -148,11 +140,11 @@ const Register = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        firstname,
-        lastname,
-        email,
+        role,
         password,
-        role
+        fullName,
+        username,
+        email
       })
     })
 
@@ -200,32 +192,33 @@ const Register = () => {
                   Basic Information
                 </Divider>
 
-                {/* Patient First and Last Name */}
+                {/* Patient FullName */}
                 <Grid container spacing={6}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12}>
                     <CustomTextField
                       autoFocus
                       fullWidth
                       required
                       sx={{ mb: 4 }}
-                      label='First Name'
-                      placeholder='First Name'
-                      name='first_name'
-                      value={firstname}
-                      onChange={e => setFirstname(e.target.value)}
+                      label='Full Name'
+                      placeholder='John Smith'
+                      name='fullName'
+                      value={fullName}
+                      onChange={e => setfullName(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+
+                  <Grid item xs={12}>
                     <CustomTextField
                       autoFocus
                       fullWidth
                       required
                       sx={{ mb: 4 }}
-                      label='Last Name'
-                      placeholder='Last Name'
-                      name='last_name'
-                      value={lastname}
-                      onChange={e => setLastname(e.target.value)}
+                      label='Username'
+                      placeholder='john_smith_12'
+                      name='username'
+                      value={username}
+                      onChange={e => setUsername(e.target.value)}
                     />
                   </Grid>
 
@@ -246,6 +239,7 @@ const Register = () => {
                   <Grid item xs={12}>
                     <CustomTextField
                       fullWidth
+                      required
                       label='Password'
                       sx={{ mb: 4 }}
                       id='auth-login-v2-password'

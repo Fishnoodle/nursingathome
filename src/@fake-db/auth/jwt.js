@@ -34,22 +34,50 @@ const users = [
   }
 ]
 
+// NEW CODE START
+
+// NEW CODE END
+
 // ! These two secrets should be in .env file and not in any other file
 const jwtConfig = {
   secret: process.env.NEXT_PUBLIC_JWT_SECRET,
   expirationTime: process.env.NEXT_PUBLIC_JWT_EXPIRATION,
   refreshTokenSecret: process.env.NEXT_PUBLIC_JWT_REFRESH_TOKEN_SECRET
 }
-mock.onPost('/jwt/login').reply(request => {
+mock.onPost('/jwt/login').reply(async request => {
   const { email, password } = JSON.parse(request.data)
+
+  const response = await fetch('http://localhost:1337/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email,
+      password
+    })
+  })
+
+  const data = await response.json()
 
   let error = {
     email: ['Something went wrong']
   }
-  const user = users.find(u => u.email === email && u.password === password)
-  console.log('USER FOUND')
+
+  const givenUser = [
+    {
+      id: data.user._id,
+      role: data.user.role,
+      password: data.user.password,
+      fullName: data.user.fullName,
+      username: data.user.username,
+      email: data.user.email
+    }
+  ]
+
+  const user = givenUser.find(u => u.email === email && u.password === password)
   if (user) {
-    const accessToken = jwt.sign({ id: user.id }, jwtConfig.secret, { expiresIn: jwtConfig.expirationTime })
+    const accessToken = jwt.sign({ id: email }, jwtConfig.secret, { expiresIn: jwtConfig.expirationTime })
 
     const response = {
       accessToken,
