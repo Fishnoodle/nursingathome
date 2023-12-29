@@ -9,8 +9,12 @@ const jwt = require('jsonwebtoken')
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect('mongodb+srv://nursingathome:nurse293dev@cluster0.bqialms.mongodb.net/?retryWrites=true&w=majority')
-console.log('CONNECTED TO DATABASE')
+try {
+  await mongoose.connect('mongodb+srv://nursingathome:nurse293dev@cluster0.bqialms.mongodb.net/?retryWrites=true&w=majority')
+  console.log('CONNECTED TO DATABASE')
+} catch (err) {
+  console.log(err)
+}
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body)
