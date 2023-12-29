@@ -10,6 +10,7 @@ app.use(cors())
 app.use(express.json())
 
 mongoose.connect('mongodb+srv://nursingathome:nurse293dev@cluster0.bqialms.mongodb.net/?retryWrites=true&w=majority')
+console.log('CONNECTED TO DATABASE')
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body)
@@ -21,6 +22,7 @@ app.post('/api/register', async (req, res) => {
       username: req.body.username,
       email: req.body.email
     })
+    console.log('REGISTERING USER')
     res.json({ status: 'ok' })
   } catch (err) {
     console.log(err)
@@ -35,8 +37,12 @@ app.post('/api/login', async (req, res) => {
   })
 
   if (user) {
+    console.log('LOGGING USER')
+
     return res.json({ status: 'ok', user })
   } else {
+    console.log('CANNOT FIND USER')
+
     return res.json({ status: 'error', user: false })
   }
 })
