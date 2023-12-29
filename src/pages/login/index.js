@@ -115,7 +115,7 @@ const LoginPage = () => {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = data => {
+  /*const onSubmit = data => {
     const { email, password } = data
     auth.login({ email, password, rememberMe }, () => {
       setError('email', {
@@ -124,17 +124,41 @@ const LoginPage = () => {
       })
     })
   }
+  */
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
 
-  // MongoDB Login Auth
-  const [user, setUser] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleOnSubmit = async e => {
-    console.log('BUTTON')
-    e.preventDefault()
-    console.log(user)
-    console.log(password)
+  //MERN Stack - Login API
+  async function loginUser(event) {
+    event.preventDefault()
+
+    const response = await fetch('http://localhost:1337/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    })
+  
+    const data = await response.json()
+    
+    if (data.user.role != 'patient'){
+      alert('Please log in to your respective portals')
+    } else {
+      alert('Login Successful!')
+      auth.login({ email, password }, () => {
+        setError('email', {
+          type: 'manual',
+          message: 'Email or Password is invalid'
+        })
+      })
+    }
+
   }
 
   return (
@@ -208,7 +232,7 @@ const LoginPage = () => {
                 Patient: <strong>patient@nursingathome.com</strong> / Pass: <strong>patient</strong>
               </Typography>
             </Alert>
-            <form noValidate autoComplete='off'>
+            <form noValidate autoComplete='off' onSubmit={loginUser}>
               <Box sx={{ mb: 4 }}>
                 <Controller
                   name='email'
@@ -221,7 +245,7 @@ const LoginPage = () => {
                       label='Email'
                       value={user}
                       onBlur={onBlur}
-                      onChange={onChange}
+                      onChange={e => setEmail(e.target.value)}
                       placeholder='patient@nursingathome.com'
                       error={Boolean(errors.email)}
                       {...(errors.email && { helperText: errors.email.message })}
@@ -240,7 +264,7 @@ const LoginPage = () => {
                       value={password}
                       onBlur={onBlur}
                       label='Password'
-                      onChange={onChange}
+                      onChange={e => setPassword(e.target.value)}
                       id='auth-login-v2-password'
                       error={Boolean(errors.password)}
                       {...(errors.password && { helperText: errors.password.message })}
@@ -279,7 +303,7 @@ const LoginPage = () => {
                   Forgot Password?
                 </Typography>
               </Box>
-              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }} onClick={handleOnSubmit}>
+              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
                 Login
               </Button>
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>

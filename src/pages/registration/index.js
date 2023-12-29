@@ -128,7 +128,7 @@ const Register = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const role = 'Doctor'
+  const role = 'doctor'
 
   //MERN Stack - Register API
   async function registerUser(event) {
@@ -151,6 +151,7 @@ const Register = () => {
     const data = await response.json()
 
     if (data.status === 'ok') {
+      alert('Registration Successful!')
       window.location.href = '/doctorlogin'
     }
   }
@@ -175,7 +176,7 @@ const Register = () => {
           <Box sx={{ width: '100%', maxWidth: 750 }}>
             <Box sx={{ my: 6 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
-                Registration Form - MONGODB IN TESTING
+                Registration Form - DOCTORS
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>Please fill in the information below correctly</Typography>
             </Box>

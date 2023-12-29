@@ -134,12 +134,30 @@ const LoginPage = () => {
   async function loginUser(event) {
     event.preventDefault()
 
-    auth.login({ email, password }, () => {
-      setError('email', {
-        type: 'manual',
-        message: 'Email or Password is invalid'
+    const response = await fetch('http://localhost:1337/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        password
       })
     })
+  
+    const data = await response.json()
+    
+    if (data.user.role != 'doctor'){
+      alert('Please log in to your respective portals')
+    } else {
+      alert('Login Successful!')
+      auth.login({ email, password }, () => {
+        setError('email', {
+          type: 'manual',
+          message: 'Email or Password is invalid'
+        })
+      })
+    }
   }
 
   return (

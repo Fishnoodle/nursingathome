@@ -66,7 +66,6 @@ const AuthProvider = ({ children }) => {
       .post(authConfig.loginEndpoint, params)
       .then(async response => {
         const returnUrl = router.query.returnUrl
-        console.log('TEST')
         setUser({ ...response.data.userData })
         params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
