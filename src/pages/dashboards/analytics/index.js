@@ -28,7 +28,7 @@ import jwt from 'jsonwebtoken'
 
 const AnalyticsDashboard = () => {
   async function populateQuote() {
-    const req = await fetch('http://localhost:1337/api/quote', {
+    const req = await fetch('http://159.203.15.201:1337/api/quote', {
       headers: {
         'x-access-token': localStorage.getItem('token')
       }

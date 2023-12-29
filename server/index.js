@@ -9,29 +9,14 @@ const jwt = require('jsonwebtoken')
 app.use(cors())
 app.use(express.json())
 
-app.post('/'), async(req,res) => {
-  console.log(req.body)
-  try {
-    const db = await mongoose.connect('mongodb+srv://nursingathome:nurse293dev@cluster0.bqialms.mongodb.net/?retryWrites=true&w=majority')
-    console.log('CONNECTED TO DATABASE')
-    res.json({ status: 'ok' })
-  } catch (err) {
-    console.log(err)
-    res.json({ status: 'error', error: 'Cannot connect to db' })
-  }
-}
+
+mongoose.connect('mongodb+srv://nursingathome:nurse293dev@cluster0.bqialms.mongodb.net/?retryWrites=true&w=majority')
+console.log('CONNECTED TO DATABASE')
 
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body)
-
-  try {
-    const db = await mongoose.connect('mongodb+srv://nursingathome:nurse293dev@cluster0.bqialms.mongodb.net/?retryWrites=true&w=majority')
-    console.log('CONNECTED TO DATABASE')
-  } catch (err) {
-    console.log(err)
-  }
-
+  
   try {
     const user = await User.create({
       role: req.body.role,
