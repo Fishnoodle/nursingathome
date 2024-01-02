@@ -77,6 +77,7 @@ mock.onPost('/jwt/login').reply(async request => {
 
   const user = givenUser.find(u => u.email === email && u.password === password)
   if (user) {
+    alert('Login Successful')
     const accessToken = jwt.sign({ id: email }, jwtConfig.secret, { expiresIn: jwtConfig.expirationTime })
 
     const response = {
@@ -89,7 +90,8 @@ mock.onPost('/jwt/login').reply(async request => {
     error = {
       email: ['email or Password is Invalid']
     }
-
+    alert('User is not Found')
+    
     return [400, { error }]
   }
 })
