@@ -25,21 +25,31 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import CardStatsWithAreaChart from 'src/@core/components/card-statistics/card-stats-with-area-chart'
 
 import jwt from 'jsonwebtoken'
+import { useHistory } from 'react-router-dom'
 
 const AnalyticsDashboard = () => {
+
+  const history = useHistory()
+  const [quote, setQuote] = useState('')
+
   async function populateQuote() {
-    const req = await fetch('http://159.203.15.201:1337/api/quote', {
+    const req = await fetch('http://localhost:1337/api/quote', {
       headers: {
-        'x-access-token': localStorage.getItem('token')
-      }
+        'x-access-token': localStorage.getItem('token'),
+      },
     })
 
-    const data = req.json()
-    console.log(data)
+    const data = await req.json()
+    if (data.status === 'ok') {
+      setQuote(data.quote)
+    } else {
+      alert(data.error)
+    }
   }
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+    console.log(token)
     if (token) {
       const user = jwt.decode(token)
       if (!user) {

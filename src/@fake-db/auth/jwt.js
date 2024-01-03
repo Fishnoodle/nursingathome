@@ -84,6 +84,9 @@ mock.onPost('/jwt/login').reply(async request => {
       accessToken,
       userData: { ...user, password: undefined }
     }
+    console.log(response)
+
+    window.localStorage.setItem(defaultAuthConfig.storageTokenKeyName, accessToken)
 
     return [200, response]
   } else {
