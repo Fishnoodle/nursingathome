@@ -75,7 +75,8 @@ mock.onPost('/jwt/login').reply(async request => {
     }
   ]
 
-  const user = givenUser.find(u => u.email === email && u.password === password)
+
+  const user = givenUser.find(u => u.email === email)
   if (user) {
     alert('Login Successful')
     const accessToken = jwt.sign({ id: email }, jwtConfig.secret, { expiresIn: jwtConfig.expirationTime })
@@ -84,7 +85,6 @@ mock.onPost('/jwt/login').reply(async request => {
       accessToken,
       userData: { ...user, password: undefined }
     }
-    console.log(response)
 
     window.localStorage.setItem(defaultAuthConfig.storageTokenKeyName, accessToken)
 

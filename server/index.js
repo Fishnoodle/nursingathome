@@ -7,6 +7,9 @@ const User = require('./models/user.model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
+const fs = require('fs');
+const https = require('https')
+
 app.use(cors())
 app.use(express.json())
 
@@ -95,6 +98,16 @@ app.post('/api/quote', async (req, res) => {
   }
 })
 
-app.listen(1337, () => {
-  console.log('Server started on 1337')
-})
+https
+  .createServer(
+    {
+      key: fs.readFileSync("server.key"),
+      cert: fs.readFileSync("server.cert"),
+    },
+    app
+  )
+  .listen(3000, function () {
+    console.log(
+      "Backend server listening on port 3000."
+    )
+  })
