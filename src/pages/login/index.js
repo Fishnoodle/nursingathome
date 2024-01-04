@@ -134,7 +134,7 @@ const LoginPage = () => {
   async function loginUser(event) {
     event.preventDefault()
 
-    const response = await fetch('http://159.203.15.201:1337/api/login', {
+    const response = await fetch('https://nursingathome.ca:1337/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -223,11 +223,6 @@ const LoginPage = () => {
                 Please sign-in to view your respective Dashboard - PATIENT LOGIN (IN MONGODB PROCESS)
               </Typography>
             </Box>
-            <Alert icon={false} sx={{ py: 2, mb: 4, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
-              <Typography variant='body2' sx={{ mb: 2, color: 'primary.main' }}>
-                Patient: <strong>patient@nursingathome.com</strong> / Pass: <strong>patient</strong>
-              </Typography>
-            </Alert>
             <form noValidate autoComplete='off' onSubmit={loginUser}>
               <Box sx={{ mb: 4 }}>
                 <Controller
@@ -305,7 +300,13 @@ const LoginPage = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
                 <Typography href='/register' component={LinkStyled}>
-                  Sign Up (Patient Intake Form)
+                  Sign Up
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Typography sx={{ color: 'text.secondary', mr: 2 }}>Wrong Portal?</Typography>
+                <Typography href='/doctorlogin' component={LinkStyled}>
+                  Doctor Login Portal
                 </Typography>
               </Box>
               <Divider

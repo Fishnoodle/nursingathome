@@ -98,16 +98,12 @@ app.post('/api/quote', async (req, res) => {
   }
 })
 
-https
-  .createServer(
-    {
-      key: fs.readFileSync("server.key"),
-      cert: fs.readFileSync("server.cert"),
-    },
-    app
-  )
-  .listen(3000, function () {
-    console.log(
-      "Backend server listening on port 3000."
-    )
-  })
+// serve the API with signed certificate on 443 (SSL/HTTPS) port
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/nursingathome.ca/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/nursingathome.ca/fullchain.pem'),
+}, app)
+
+httpsServer.listen(443, () => {
+  console.log('HTTPS Server running on port 1337')
+});

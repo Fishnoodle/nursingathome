@@ -134,7 +134,7 @@ const LoginPage = () => {
   async function loginUser(event) {
     event.preventDefault()
 
-    const response = await fetch('http://159.203.15.201:1337/api/login', {
+    const response = await fetch('https://nursingathome.ca:1337/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -221,11 +221,6 @@ const LoginPage = () => {
                 Please sign-in to view your respective Dashboard - DOCTOR LOGIN
               </Typography>
             </Box>
-            <Alert icon={false} sx={{ py: 2, mb: 4, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
-              <Typography variant='body2' sx={{ mb: 2, color: 'primary.main' }}>
-                Doctor: <strong>doctor@nursingathome.com</strong> / Pass: <strong>doctor</strong>
-              </Typography>
-            </Alert>
             <form noValidate autoComplete='off' onSubmit={loginUser}>
               <Box sx={{ mb: 4 }}>
                 <Controller

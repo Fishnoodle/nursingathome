@@ -47,7 +47,7 @@ const jwtConfig = {
 mock.onPost('/jwt/login').reply(async request => {
   const { email, password } = JSON.parse(request.data)
 
-  const response = await fetch('http://159.203.15.201:1337/api/login', {
+  const response = await fetch('https://nursingathome.ca:1337/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -59,6 +59,8 @@ mock.onPost('/jwt/login').reply(async request => {
   })
 
   const data = await response.json()
+
+  console.log(data)
 
   let error = {
     email: ['Something went wrong']
@@ -75,9 +77,12 @@ mock.onPost('/jwt/login').reply(async request => {
     }
   ]
 
+  console.log(givenUser)
 
   const user = givenUser.find(u => u.email === email)
   if (user) {
+    localStorage.setItem('token', data.token)
+    console.log('token stored!')
     alert('Login Successful')
     const accessToken = jwt.sign({ id: email }, jwtConfig.secret, { expiresIn: jwtConfig.expirationTime })
 
