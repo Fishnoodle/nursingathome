@@ -16,7 +16,7 @@ app.use(express.json())
 
 mongoose.connect('mongodb+srv://nursingathome:nurse293dev@cluster0.bqialms.mongodb.net/?retryWrites=true&w=majority')
 
-
+// Registers new user based on registration form
 app.post('/api/register', async (req, res) => {
   console.log(req.body)
   
@@ -38,6 +38,7 @@ app.post('/api/register', async (req, res) => {
   }
 })
 
+// Logins user, hashed password, and create jwt token
 app.post('/api/login', async (req, res) => {
   const user = await User.findOne({
     email: req.body.email,
@@ -67,6 +68,21 @@ app.post('/api/login', async (req, res) => {
   }
 })
 
+// Retrieves user account
+app.get('/api/userid', async(req,res) => {
+  const token = req.headers['x-access-token']
+
+  try {
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    const user = awaitUser.findOne({ email: email })
+    res.json({ status: 'ok', user: user })
+  } catch (error) {
+    res.json({ status: 'error', error: 'invalid user'})
+  }
+})
+
+// Retrieves user token
 app.get('/api/quote', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -75,11 +91,12 @@ app.get('/api/quote', async (req, res) => {
     const email = decoded.email
     const user = await User.findOne({ email: email })
   } catch (error) {
-    console.log(error)
+    console.log(error) 
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
 
+/*
 app.post('/api/quote', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -97,6 +114,7 @@ app.post('/api/quote', async (req, res) => {
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
+*/
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
 const httpsServer = https.createServer({
