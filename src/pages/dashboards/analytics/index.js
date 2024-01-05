@@ -98,7 +98,9 @@ const AnalyticsDashboard = () => {
   }
 
   return (
-    <><div>
+    <>
+    
+    {/*<div>
       <h1>Your quote: {quote || 'No quote found'}</h1>
       <form onSubmit={updateQuote}>
         <input
@@ -109,6 +111,7 @@ const AnalyticsDashboard = () => {
         <input type="submit" value="Update quote" />
       </form>
     </div>
+  */}
         
         <ApexChartWrapper>
         <KeenSliderWrapper>
