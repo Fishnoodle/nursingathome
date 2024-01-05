@@ -72,6 +72,7 @@ const AnalyticsDashboard = () => {
     }
   }, [])
 
+  /*
   async function updateQuote(event) {
     event.preventDefault()
 
@@ -96,23 +97,10 @@ const AnalyticsDashboard = () => {
       alert(data.error)
     }
   }
+  */
 
   return (
-    <>
-    
-    {/*<div>
-      <h1>Your quote: {quote || 'No quote found'}</h1>
-      <form onSubmit={updateQuote}>
-        <input
-          type="text"
-          placeholder="Quote"
-          value={tempQuote}
-          onChange={(e) => setTempQuote(e.target.value)} />
-        <input type="submit" value="Update quote" />
-      </form>
-    </div>
-  */}
-        
+    <>  
         <ApexChartWrapper>
         <KeenSliderWrapper>
           <Grid container spacing={4}>

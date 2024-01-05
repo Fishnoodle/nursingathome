@@ -1,5 +1,6 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect } from 'react'
+import jwt from 'jsonwebtoken'
 
 // ** Next Import
 import { useRouter } from 'next/router'
@@ -80,6 +81,41 @@ const UserDropdown = props => {
     handleDropdownClose()
   }
 
+  const [user, setUser] = useState('')
+
+  async function getUser() {
+    console.log('Getting User data...')
+
+    const req = await fetch('https://nursingathome.ca:1337/api/userid', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+
+    const data = await req.json()
+
+    console.log(data)
+
+    if (data.status === 'ok'){
+      setUser(data.user)
+    } else {
+      alert(data.error)
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const user = jwt.decode(token)
+      if (!user){
+        alert('Token not found')
+      } else {
+        console.log('Token found, applying for user data')
+        getUser()
+      }
+    }
+  }, [])
+
   return (
     <Fragment>
       <Badge
@@ -120,8 +156,8 @@ const UserDropdown = props => {
               <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', ml: 2.5, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 500 }}>John Doe</Typography>
-              <Typography variant='body2'>Admin</Typography>
+              <Typography sx={{ fontWeight: 500 }}>{user.fullName}</Typography>
+              <Typography variant='body2'>{user.role}</Typography>
             </Box>
           </Box>
         </Box>

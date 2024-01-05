@@ -1,5 +1,6 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
+import jwt from 'jsonwebtoken'
 
 // ** MUI Components
 import Box from '@mui/material/Box'
@@ -36,6 +37,41 @@ const UserProfileHeader = () => {
   }, [])
   const designationIcon = data?.designationIcon || 'tabler:briefcase'
 
+  const [user, setUser] = useState('')
+
+  async function getUser() {
+    console.log('Getting User data...')
+
+    const req = await fetch('https://nursingathome.ca:1337/api/userid', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+
+    const data = await req.json()
+
+    console.log(data)
+
+    if (data.status === 'ok'){
+      setUser(data.user)
+    } else {
+      alert(data.error)
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const user = jwt.decode(token)
+      if (!user){
+        alert('Token not found')
+      } else {
+        console.log('Token found, applying for user data')
+        getUser()
+      }
+    }
+  }, [])
+
   return data !== null ? (
     <Card>
       <CardMedia
@@ -69,7 +105,7 @@ const UserProfileHeader = () => {
         >
           <Box sx={{ mb: [6, 0], display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}>
             <Typography variant='h5' sx={{ mb: 2.5 }}>
-              {data.fullName}
+              {user.fullName}
             </Typography>
             <Box
               sx={{
@@ -80,15 +116,15 @@ const UserProfileHeader = () => {
             >
               <Box sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
                 <Icon fontSize='1.25rem' icon={designationIcon} />
-                <Typography sx={{ color: 'text.secondary' }}>{data.designation}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{user.role}</Typography>
               </Box>
               <Box sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
                 <Icon fontSize='1.25rem' icon='tabler:map-pin' />
-                <Typography sx={{ color: 'text.secondary' }}>{data.location}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>Vancouver</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
                 <Icon fontSize='1.25rem' icon='tabler:calendar' />
-                <Typography sx={{ color: 'text.secondary' }}>Joined {data.joiningDate}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>Joined 2023</Typography>
               </Box>
             </Box>
           </Box>
