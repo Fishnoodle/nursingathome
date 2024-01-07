@@ -120,10 +120,10 @@ app.post('/api/patientprofile', async (req, res) => {
 // Post Appointment
 app.post('/api/patientrecords/appointment', async (req, res) => {
   try {
-    const newAppointmentName = await bcrypt.hash(req,body.appointment.name, 10) | '' 
-    const newAppointmentDate = await bcrypt.hash(req,body.appointment.date, 10) | '' 
-    const newAppointmentDuration = await bcrypt.hash(req,body.appointment.duration, 10) | ''  
-    const newAppointmentAddress = await bcrypt.hash(req,body.appointment.address, 10) | '' 
+    const newAppointmentName = await bcrypt.hash(req.body.appointment.name, 10) | '' 
+    const newAppointmentDate = await bcrypt.hash(req.body.appointment.date, 10) | '' 
+    const newAppointmentDuration = await bcrypt.hash(req.body.appointment.duration, 10) | ''  
+    const newAppointmentAddress = await bcrypt.hash(req.body.appointment.address, 10) | '' 
 
     const appointment = await patientRecords({
       appointment: {
@@ -143,10 +143,10 @@ app.post('/api/patientrecords/appointment', async (req, res) => {
 // Post Records (BP/Pulse/Insertion/Etc.)
 app.post('/api/patientrecords/bplist', async (req, res) => {
   try {
-    const newBpDate = await bcrypt.hash(req,body.bplist.date, 10) | '' 
-    const newBpBp = await bcrypt.hash(req,body.bplist.bp, 10) | '' 
-    const newBplistPulse = await bcrypt.hash(req,body.bplist.pulse, 10) | ''  
-    const newBplistInsertion = await bcrypt.hash(req,body.bplist.insertion, 10) | '' 
+    const newBpDate = await bcrypt.hash(req.body.bplist.date, 10) | '' 
+    const newBpBp = await bcrypt.hash(req.body.bplist.bp, 10) | '' 
+    const newBplistPulse = await bcrypt.hash(req.body.bplist.pulse, 10) | ''  
+    const newBplistInsertion = await bcrypt.hash(req.body.bplist.insertion, 10) | '' 
 
     const bplist = await patientRecords({
       bplist: {
