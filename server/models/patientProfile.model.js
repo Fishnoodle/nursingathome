@@ -27,6 +27,6 @@ const patientProfile = new mongoose.Schema(
   { collection: 'patientProfile' }
 )
 
-const model = mongoose.model('UserData', patientProfile)
+const model = mongoose.model('PatientProfile', patientProfile)
 
 module.exports = model

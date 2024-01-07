@@ -20,6 +20,6 @@ const patientRecords = new mongoose.Schema(
     { collection: 'patientRecords' }
 )
 
-const model = mongoose.model('UserData', patientRecords)
+const model = mongoose.model('PatientRecords', patientRecords)
 
 model.exports = model
